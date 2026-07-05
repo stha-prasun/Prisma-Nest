@@ -14,7 +14,6 @@ export class PrismaCourseRepository implements ICourseRepository {
         title: course.title,
         description: course.description,
         price: course.price,
-        slug: course.slug,
       },
     });
   }
