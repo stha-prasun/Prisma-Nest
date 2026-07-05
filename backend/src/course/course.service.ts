@@ -1,0 +1,33 @@
+import { Inject, Injectable } from '@nestjs/common';
+import { CreateCourseDto } from './dto/create-course.dto';
+import { UpdateCourseDto } from './dto/update-course.dto';
+import { COURSE_REPOSITORY } from './constants/course.constants';
+import type { ICourseRepository } from './interfaces/course-repository.interface';
+
+@Injectable()
+export class CourseService {
+  constructor(
+    @Inject(COURSE_REPOSITORY)
+    private readonly repository: ICourseRepository,
+  ) {}
+
+  create(createCourseDto: CreateCourseDto) {
+    return 'This action adds a new course';
+  }
+
+  async findAll() {
+    return await this.repository.findAll();
+  }
+
+  async findOne(id: string) {
+    return await this.repository.findById(id);
+  }
+
+  async update(id: string, updateCourseDto: UpdateCourseDto) {
+    return await this.repository.update(id, updateCourseDto);
+  }
+
+  async remove(id: string) {
+    return await this.repository.delete(id);
+  }
+}
