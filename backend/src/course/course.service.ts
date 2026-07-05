@@ -3,16 +3,21 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { COURSE_REPOSITORY } from './constants/course.constants';
 import type { ICourseRepository } from './interfaces/course-repository.interface';
+import { CourseFactory } from './factories/course.factory';
 
 @Injectable()
 export class CourseService {
   constructor(
     @Inject(COURSE_REPOSITORY)
     private readonly repository: ICourseRepository,
+
+    private readonly factory: CourseFactory,
   ) {}
 
-  create(createCourseDto: CreateCourseDto) {
-    return 'This action adds a new course';
+  async create(dto: CreateCourseDto) {
+    const course = this.factory.create(dto);
+
+    return this.repository.create(course);
   }
 
   async findAll() {

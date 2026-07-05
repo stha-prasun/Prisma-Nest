@@ -1,16 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateCourseDto } from '../dto/create-course.dto';
 import { ICourseRepository } from '../interfaces/course-repository.interface';
 import { UpdateCourseDto } from '../dto/update-course.dto';
+import { CourseEntity } from '../entities/course.entity';
 
 @Injectable()
 export class PrismaCourseRepository implements ICourseRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: CreateCourseDto) {
+  async create(course: CourseEntity) {
     return this.prisma.course.create({
-      data,
+      data: {
+        title: course.title,
+        description: course.description,
+        price: course.price,
+        slug: course.slug,
+      },
     });
   }
 

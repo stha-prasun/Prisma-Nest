@@ -1,9 +1,9 @@
 import { Course } from '@prisma/client';
-import { CreateCourseDto } from '../dto/create-course.dto';
 import { UpdateCourseDto } from '../dto/update-course.dto';
+import { CourseEntity } from '../entities/course.entity';
 
 export interface ICourseRepository {
-  create(data: CreateCourseDto): Promise<Course>;
+  create(course: CourseEntity): Promise<Course>;
 
   findById(id: string): Promise<Course | null>;
 
