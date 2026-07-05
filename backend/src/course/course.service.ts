@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { COURSE_REPOSITORY } from './constants/course.constants';
@@ -20,7 +20,11 @@ export class CourseService {
   }
 
   async findOne(id: string) {
-    return await this.repository.findById(id);
+    const course = await this.repository.findById(id);
+    if (!course) {
+      throw new NotFoundException(`Course with id ${id} not found`);
+    }
+    return course;
   }
 
   async update(id: string, updateCourseDto: UpdateCourseDto) {

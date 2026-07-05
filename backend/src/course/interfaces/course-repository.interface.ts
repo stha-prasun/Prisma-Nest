@@ -11,5 +11,5 @@ export interface ICourseRepository {
 
   update(id: string, data: Partial<UpdateCourseDto>): Promise<Course>;
 
-  delete(id: string): Promise<Course>;
+  delete(id: string): void;
 }
